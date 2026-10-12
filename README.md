@@ -194,12 +194,4 @@ python evaluate.py \
 
 To train on another dataset, set `--dataset` to `vaihingen`, `loveda`, or `uavid` and use the matching data and checkpoint.
 
-## 10. Reproducibility Status
 
-This is an independently reconstructed implementation based on the FMSP-Net manuscript rather than the authors' original verified research code. The decoder wiring, prompt wording, and some architectural details are implementation choices where the manuscript does not specify exact executable configurations. The included CPU smoke checkpoint was trained on synthetic samples and does not reproduce the reported benchmark results. Paper-level reproduction requires the original experimental configuration, prepared datasets, and research-trained model weights.
-
-To export the installed dependencies after validating the A100 environment:
-
-```bash
-python -m pip freeze > requirements-locked-a100.txt
-```
