@@ -72,38 +72,7 @@ FMSP-Net/
 └── checkpoints/
 ```
 
-## 3. Model Components
-
-| Module | Source | Function |
-|---|---|---|
-| SAM ViT-H | `models/backbone.py` | Extract hierarchical features from layers 6, 12, 18, and 24 |
-| MSAM | `models/msam.py` | Fuse optical and DSM representations |
-| FSA | `models/fsa.py` | Frequency separation using FFT/IFFT and learnable masks |
-| MMAM | `models/mmam.py` | Aggregate multi-scale representations using bidirectional Mamba |
-| CLIP / LSAM | `models/text.py`, `models/lsam.py` | Construct class prototypes and category activation maps |
-| DPR | `models/dpr.py` | Update prototype memory and refine visual features |
-| Decoder | `models/decoder.py` | Generate semantic predictions from visual and prompt features |
-| Joint Loss | `models/losses.py` | Cross-entropy, Dice, boundary and prototype losses |
-
-## 4. Input Format
-
-Each dataset sample is stored in a `.pt` file containing a Python dictionary.
-
-| Key | Tensor shape | Data type | Requirement |
-|---|---|---|---|
-| `image` | `[3, H, W]` | `torch.float32`, values in `[0, 1]` | Required |
-| `mask` | `[H, W]` | `torch.int64`, labels `0...K-1`, ignore label `255` | Training/evaluation |
-| `dsm` | `[1, H, W]` | `torch.float32`, values in `[0, 1]` | Potsdam/Vaihingen |
-
-Training and evaluation use a manifest containing a JSON list of sample paths:
-
-```json
-["sample_0001.pt", "sample_0002.pt"]
-```
-
-Input images and DSM tensors must already be spatially aligned. LoveDA and UAVid do not require DSM inputs.
-
-## 5. Unit Tests and CPU Smoke Test
+## 3. Unit Tests and CPU Smoke Test
 
 ```bash
 python -m pip install -r requirements-test.txt
@@ -121,7 +90,7 @@ python evaluate.py \
   --device cpu --allow-smoke-checkpoint
 ```
 
-## 6. SAM, CLIP, and Mamba Integration Test
+## 4. SAM, CLIP, and Mamba Integration Test
 
 Provide an official SAM ViT-H checkpoint and install the corresponding CLIP and Mamba dependencies.
 
@@ -131,7 +100,7 @@ python verify_backend.py \
   --dataset potsdam --patch-size 512 --device cuda
 ```
 
-## 7. Training
+## 5. Training
 
 ```bash
 python train.py \
@@ -159,7 +128,7 @@ python train.py \
   --device cuda --save-dir checkpoints/potsdam_run
 ```
 
-## 8. Inference
+## 6. Inference
 
 ```bash
 python inference.py \
@@ -178,7 +147,7 @@ The saved result contains the following tensors:
 | `probabilities` | `[1, K, H, W]` | Per-class softmax probabilities |
 | `activation` | `[1, K, h, w]` | Text-guided activation maps |
 
-## 9. Evaluation
+## 7. Evaluation
 
 ```bash
 python evaluate.py \
