@@ -1,4 +1,4 @@
-# FMSP-Net: Training and Inference
+# FMSP-Net
 
 FMSP-Net is a remote sensing semantic segmentation framework integrating Multi-Modal Spatial Anchoring (MSAM), Frequency Semantic Adapters (FSA), Multi-Scale Mamba Aggregation (MMAM), Language-Guided Semantic Activation (LSAM), and Dynamic Prototype Refinement (DPR).
 
@@ -41,13 +41,9 @@ python -c "import torch, open_clip; from segment_anything import sam_model_regis
 ## 2. Project Structure
 
 ```text
-FMSP-Net_A100_runnable/
+FMSP-Net/
 ├── README.md
-├── README_ZH.md
-├── INSTALL_A100.md
 ├── requirements.txt
-├── requirements_A100_mamba_compat.txt
-├── requirements-test.txt
 ├── configs/
 │   ├── __init__.py
 │   └── datasets.py
